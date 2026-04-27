@@ -1,0 +1,171 @@
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+    color: var(--color-white);
+    padding: 8px 20px;
+    font-size: 14px;
+    z-index: 301;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-info {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.contact-info span {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.contact-info a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.contact-info a:hover {
+    color: var(--color-primary-accent);
+    text-decoration: underline;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: fixed;
+    width: 100vw;
+    top: 30px; /* Adjusted to be below top-bar */
+    z-index: 1000;
+    padding: 20px;
+}
+.navbar.active{
+    background: var(--color-ui-secondary);
+}
+.navbar .box,
+.navbar .nav__tabs{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.navbar .nav__tabs .tab{
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: var(--color-white);
+    transition: var(--transition);
+    border-radius: 6px;
+    font-weight: 500;
+    /* border: 1px solid rgba(255, 255, 255, 0.2); */
+}
+.navbar .nav__tabs .tab:hover{
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background: rgba(18, 184, 166, 0.1);
+}
+.navbar .nav__tabs .tab.g-text {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.navbar .contact__btn {
+    border: 2px solid var(--color-primary) !important;
+    background: transparent !important;
+    color: var(--color-primary) !important;
+    padding: 10px 20px !important;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.navbar .contact__btn:hover {
+    background: var(--color-primary) !important;
+    color: var(--color-white) !important;
+}
+.navbar .cancel__btn,
+.navbar .menu__btn{
+    display: none;
+    background: transparent;
+    font-size: 25px;
+}
+.navbar .cancel__btn{
+    color: var(--color-white) !important;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+.navbar .menu__btn{
+    font-size: 2rem;
+    color: var(--color-primary) !important;
+}
+.sidebar__overlay{
+    position: fixed;
+    background: rgba(1,1,1,0.5);
+    top: 0;
+    left: 0;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: none;
+}
+@media (max-width: 1000px) {
+    .top-bar {
+        display: none; /* Hide on small and medium screens */
+    }
+    .navbar {
+        top: 0; /* Reset top if top-bar hidden */
+    }
+}
+
+@media (max-width: 1000px) {
+    .navbar{
+        position: fixed;
+        top: 0;
+        background: var(--color-ui-secondary);
+    }
+    .navbar .nav__tabs{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        max-width: 350px;
+        top: 0;
+        left: -100%;
+        overflow: hidden;
+        display: block;
+        background: var(--color-muted);
+        transition: var(--transition);
+        z-index: 350;
+        padding-top: 60px;
+    }
+    .navbar .nav__tabs.visible{
+        left: 0;
+    }
+    .navbar .nav__tabs .tab{
+        padding: 10px 20px;
+    }
+    .navbar .cancel__btn,
+    .navbar .menu__btn{
+        display: flex;
+    }
+    .sidebar__overlay{
+        display: block;
+    }
+}
+
+@media (max-width:500px){
+    .navbar .contact__btn{
+        display: none;
+    }
+}

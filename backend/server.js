@@ -22,6 +22,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 // CORS configuration for production
 const corsOptions = {
     origin: [
+        'https://api.northtek.co.tz',
+        'https://www.api.northtek.co.tz',
         'https://www.northtek.co.tz',
         'https://northtek.co.tz',
         'http://www.northtek.co.tz',

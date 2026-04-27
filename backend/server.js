@@ -19,26 +19,37 @@ require('dotenv').config();
 // Production settings
 const isProduction = process.env.NODE_ENV === 'production';
 
-// CORS configuration for production
-const corsOptions = {
-    origin: [
-        'https://api.northtek.co.tz',
-        'https://www.api.northtek.co.tz',
-        'https://www.northtek.co.tz',
-        'https://northtek.co.tz',
-        'http://www.northtek.co.tz',
-        'http://northtek.co.tz'
-    ],
-    credentials: true
-};
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const db = new Database('enquiries.db');
 
-// Middleware
-// app.use(cors());
+// CORS configuration for production
+const allowedOrigins = [
+    'https://northtek.co.tz',
+    'https://www.northtek.co.tz',
+    'https://api.northtek.co.tz',
+    'https://www.api.northtek.co.tz'
+];
+
+const corsOptions = {
+    origin: function (origin, callback) {
+        // allow requests with no origin (Postman, mobile apps)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error('Not allowed by CORS: ' + origin));
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+};
+
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
 
 // Serve static files for admin panel
